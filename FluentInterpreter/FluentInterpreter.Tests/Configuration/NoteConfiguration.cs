@@ -8,6 +8,6 @@ namespace FluentInterpreter.Tests.Configuration
 	public class NoteConfiguration : IEntityTypeConfiguration<Note>
 	{
 		public void Configure(EntityTypeBuilder<Note> builder)
-			=> builder.OneToMany(n => n.User, u => u.Notes, n => n.UserId);
+			=> builder.OneToMany(n => n.User, u => u.Notes, n => new { n.UserId, n.Text });
 	}
 }

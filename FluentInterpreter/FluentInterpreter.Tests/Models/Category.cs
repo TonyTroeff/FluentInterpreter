@@ -2,12 +2,12 @@ namespace FluentInterpreter.Tests.Models
 {
 	using System.Collections.Generic;
 
-	public class User
+	public class Category
 	{
 		public int Id { get; set; }
+		
+		public string Name { get; set; }
 
-		public string Username { get; set; }
-
-		public ICollection<Note> Notes { get; set; }
+		public ICollection<NoteCategory> Notes { get; set; }
 	}
 }

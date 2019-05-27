@@ -1,5 +1,7 @@
 namespace FluentInterpreter.Tests.Models
 {
+	using System.Collections.Generic;
+
 	public class Note
 	{
 		public int Id { get; set; }
@@ -7,5 +9,7 @@ namespace FluentInterpreter.Tests.Models
 
 		public int UserId { get; set; }
 		public User User { get; set; }
+
+		public ICollection<NoteCategory> Categories { get; set; }
 	}
 }

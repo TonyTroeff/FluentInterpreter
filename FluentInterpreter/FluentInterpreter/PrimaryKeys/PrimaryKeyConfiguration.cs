@@ -10,6 +10,7 @@ namespace FluentInterpreter.PrimaryKeys
 	public static class PrimaryKeyConfiguration
 	{
 		// TODO: Add index.
+		// TODO: Add method to the Properties -> .IsPrimaryKey(); .IsForeignKey();
 		public static void PrimaryKey<T>(
 			this EntityTypeBuilder<T> builder,
 			Expression<Func<T, object>> primaryKeyExpression)

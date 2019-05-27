@@ -1,5 +1,9 @@
 ﻿namespace FluentInterpreter
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Linq.Expressions;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -40,5 +44,20 @@
 			=> builder.HasColumnName(name)
 				.HasColumnType(type)
 				.IsRequired(isRequired);
+
+		public static string[] GetPropertyNames<T>(Expression<Func<T, object>> expression)
+		{
+			List<string> propertyNames = new List<string>();
+
+			if ((expression.Body as UnaryExpression)?.Operand is MemberExpression memberExpression)
+				propertyNames.Add(memberExpression.Member.Name);
+			else if (expression.Body is NewExpression newExpression)
+				propertyNames.AddRange(newExpression.Members.Select(m => m.Name));
+
+			// TODO: Exception.
+			else throw new ArgumentException();
+
+			return propertyNames.ToArray();
+		}
 	}
 }

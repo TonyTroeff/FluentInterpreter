@@ -12,6 +12,7 @@ namespace FluentInterpreter.Tests
 		{
 			modelBuilder.ApplyConfiguration(new NoteConfiguration());
 			modelBuilder.ApplyConfiguration(new UserConfiguration());
+			modelBuilder.ApplyConfiguration(new NoteCategoryConfiguration());
 		}
 	}
 }

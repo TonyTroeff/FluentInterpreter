@@ -10,11 +10,11 @@ namespace FluentInterpreter.ForeignKeys
 
 	public static class OneToManyConfiguration
 	{
-		public static void OneToMany<TDescendant, TPrincipal, TForeignKey>(
+		public static void OneToMany<TDescendant, TPrincipal>(
 			this EntityTypeBuilder<TDescendant> builder,
 			Expression<Func<TDescendant, TPrincipal>> descendantNavigationPropertyExpression,
 			Expression<Func<TPrincipal, IEnumerable<TDescendant>>> principalNavigationPropertyExpression,
-			Expression<Func<TDescendant, TForeignKey>> foreignKeyPropertyExpression)
+			Expression<Func<TDescendant, object>> foreignKeyPropertyExpression)
 			where TDescendant : class
 			where TPrincipal : class
 			=> builder.OneToMany(
@@ -24,11 +24,11 @@ namespace FluentInterpreter.ForeignKeys
 				new DefaultTableNaming(),
 				new DefaultForeignKeyNaming());
 
-		public static void OneToMany<TDescendant, TPrincipal, TForeignKey>(
+		public static void OneToMany<TDescendant, TPrincipal>(
 			this EntityTypeBuilder<TDescendant> builder,
 			Expression<Func<TDescendant, TPrincipal>> descendantNavigationPropertyExpression,
 			Expression<Func<TPrincipal, IEnumerable<TDescendant>>> principalNavigationPropertyExpression,
-			Expression<Func<TDescendant, TForeignKey>> foreignKeyPropertyExpression,
+			Expression<Func<TDescendant, object>> foreignKeyPropertyExpression,
 			ITableNaming tableNaming)
 			where TDescendant : class
 			where TPrincipal : class
@@ -39,11 +39,11 @@ namespace FluentInterpreter.ForeignKeys
 				tableNaming,
 				new DefaultForeignKeyNaming());
 
-		public static void OneToMany<TDescendant, TPrincipal, TForeignKey>(
+		public static void OneToMany<TDescendant, TPrincipal>(
 			this EntityTypeBuilder<TDescendant> builder,
 			Expression<Func<TDescendant, TPrincipal>> descendantNavigationPropertyExpression,
 			Expression<Func<TPrincipal, IEnumerable<TDescendant>>> principalNavigationPropertyExpression,
-			Expression<Func<TDescendant, TForeignKey>> foreignKeyPropertyExpression,
+			Expression<Func<TDescendant, object>> foreignKeyPropertyExpression,
 			IForeignKeyNaming foreignKeyNaming)
 			where TDescendant : class
 			where TPrincipal : class
@@ -54,32 +54,28 @@ namespace FluentInterpreter.ForeignKeys
 				new DefaultTableNaming(),
 				foreignKeyNaming);
 
-		public static void OneToMany<TDescendant, TPrincipal, TForeignKey>(
+		public static void OneToMany<TDescendant, TPrincipal>(
 			this EntityTypeBuilder<TDescendant> builder,
 			Expression<Func<TDescendant, TPrincipal>> descendantNavigationPropertyExpression,
 			Expression<Func<TPrincipal, IEnumerable<TDescendant>>> principalNavigationPropertyExpression,
-			Expression<Func<TDescendant, TForeignKey>> foreignKeyPropertyExpression,
+			Expression<Func<TDescendant, object>> foreignKeyPropertyExpression,
 			ITableNaming tableNaming,
 			IForeignKeyNaming foreignKeyNaming)
 			where TDescendant : class
 			where TPrincipal : class
 		{
 			// TODO: Create custom exceptions.
-			if (!(foreignKeyPropertyExpression.Body is MemberExpression foreignKeyExpresion))
-				throw new ArgumentException();
 			if (descendantNavigationPropertyExpression.Body is MemberExpression == false) throw new ArgumentException();
 			if (principalNavigationPropertyExpression.Body is MemberExpression == false) throw new ArgumentException();
 
+			string[] foreignKeyPropertyName = Common.GetPropertyNames(foreignKeyPropertyExpression);
+
 			string descendantTableName = tableNaming.GetTableName(typeof(TDescendant));
 			string principalTableName = tableNaming.GetTableName(typeof(TPrincipal));
-			string foreignKeyPropertyName = foreignKeyExpresion.Member.Name;
 
 			builder.HasOne(descendantNavigationPropertyExpression)
 				.WithMany(principalNavigationPropertyExpression)
-				.HasForeignKey(
-					Expression.Lambda<Func<TDescendant, object>>(
-						Expression.Convert(foreignKeyPropertyExpression.Body, typeof(object)),
-						foreignKeyPropertyExpression.Parameters))
+				.HasForeignKey(foreignKeyPropertyExpression)
 				.HasConstraintName(
 					foreignKeyNaming.GetConstraintName(
 						descendantTableName,

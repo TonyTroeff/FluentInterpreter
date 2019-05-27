@@ -5,7 +5,7 @@ namespace FluentInterpreter.ForeignKeys.NamingConvention
 		public string GetConstraintName(
 			string descendantTableName,
 			string principalTableName,
-			string foreignKeyPropertyName)
-			=> $"{Convention.FOREIGN_KEY_PREFIX}{Convention.DELIMITER}{descendantTableName}{Convention.DELIMITER}{principalTableName}{Convention.DELIMITER}{foreignKeyPropertyName}";
+			params string[] foreignKeyPropertyNames)
+			=> $"{Convention.FOREIGN_KEY_PREFIX}{Convention.DELIMITER}{descendantTableName}{Convention.DELIMITER}{principalTableName}{Convention.DELIMITER}{string.Join(Convention.DELIMITER, foreignKeyPropertyNames)}";
 	}
 }
