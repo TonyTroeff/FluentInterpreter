@@ -3,6 +3,7 @@ namespace FluentInterpreter.ForeignKeys
 	using System;
 	using System.Collections.Generic;
 	using System.Linq.Expressions;
+	using Exceptions;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 	using NamingConvention;
@@ -64,9 +65,10 @@ namespace FluentInterpreter.ForeignKeys
 			where TDescendant : class
 			where TPrincipal : class
 		{
-			// TODO: Create custom exceptions.
-			if (descendantNavigationPropertyExpression.Body is MemberExpression == false) throw new ArgumentException();
-			if (principalNavigationPropertyExpression.Body is MemberExpression == false) throw new ArgumentException();
+			if (descendantNavigationPropertyExpression.Body is MemberExpression == false)
+				throw new NotMemberExpressionException(nameof(descendantNavigationPropertyExpression));
+			if (principalNavigationPropertyExpression.Body is MemberExpression == false)
+				throw new ArgumentException(nameof(principalNavigationPropertyExpression));
 
 			string[] foreignKeyPropertyName = Common.GetPropertyNames(foreignKeyPropertyExpression);
 

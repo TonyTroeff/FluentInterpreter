@@ -7,6 +7,6 @@ namespace FluentInterpreter.Tests.Configuration
 
 	public class UserConfiguration : IEntityTypeConfiguration<User>
 	{
-		public void Configure(EntityTypeBuilder<User> builder) { builder.PrimaryKey(u => new { u.Id, u.Username }); }
+		public void Configure(EntityTypeBuilder<User> builder) { builder.PrimaryKey(u => u.Id); }
 	}
 }

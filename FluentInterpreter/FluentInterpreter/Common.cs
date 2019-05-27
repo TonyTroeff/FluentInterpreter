@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Linq.Expressions;
+	using Exceptions;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -45,17 +46,15 @@
 				.HasColumnType(type)
 				.IsRequired(isRequired);
 
-		public static string[] GetPropertyNames<T>(Expression<Func<T, object>> expression)
+		public static string[] GetPropertyNames<T>(Expression<Func<T, object>> keyExpression)
 		{
 			List<string> propertyNames = new List<string>();
 
-			if ((expression.Body as UnaryExpression)?.Operand is MemberExpression memberExpression)
+			if ((keyExpression.Body as UnaryExpression)?.Operand is MemberExpression memberExpression)
 				propertyNames.Add(memberExpression.Member.Name);
-			else if (expression.Body is NewExpression newExpression)
+			else if (keyExpression.Body is NewExpression newExpression)
 				propertyNames.AddRange(newExpression.Members.Select(m => m.Name));
-
-			// TODO: Exception.
-			else throw new ArgumentException();
+			else throw new InvalidKeyExpressionException(nameof(keyExpression));
 
 			return propertyNames.ToArray();
 		}

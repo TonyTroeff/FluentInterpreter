@@ -3,6 +3,7 @@ namespace FluentInterpreter.ForeignKeys
 	using System;
 	using System.Collections.Generic;
 	using System.Linq.Expressions;
+	using Exceptions;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 	using NamingConvention;
@@ -58,24 +59,25 @@ namespace FluentInterpreter.ForeignKeys
 			this EntityTypeBuilder<TDescendant> builder,
 			Expression<Func<TDescendant, TPrincipal>> descendantNavigationPropertyExpression,
 			Expression<Func<TPrincipal, IEnumerable<TDescendant>>> principalNavigationPropertyExpression,
-			Expression<Func<TDescendant, object>> foreignKeyPropertyExpression,
+			Expression<Func<TDescendant, object>> foreignKeyExpression,
 			ITableNaming tableNaming,
 			IForeignKeyNaming foreignKeyNaming)
 			where TDescendant : class
 			where TPrincipal : class
 		{
-			// TODO: Create custom exceptions.
-			if (descendantNavigationPropertyExpression.Body is MemberExpression == false) throw new ArgumentException();
-			if (principalNavigationPropertyExpression.Body is MemberExpression == false) throw new ArgumentException();
+			if (descendantNavigationPropertyExpression.Body is MemberExpression == false)
+				throw new NotMemberExpressionException(nameof(descendantNavigationPropertyExpression));
+			if (principalNavigationPropertyExpression.Body is MemberExpression == false)
+				throw new NotMemberExpressionException(nameof(principalNavigationPropertyExpression));
 
-			string[] foreignKeyPropertyName = Common.GetPropertyNames(foreignKeyPropertyExpression);
+			string[] foreignKeyPropertyName = Common.GetPropertyNames(foreignKeyExpression);
 
 			string descendantTableName = tableNaming.GetTableName(typeof(TDescendant));
 			string principalTableName = tableNaming.GetTableName(typeof(TPrincipal));
 
 			builder.HasOne(descendantNavigationPropertyExpression)
 				.WithMany(principalNavigationPropertyExpression)
-				.HasForeignKey(foreignKeyPropertyExpression)
+				.HasForeignKey(foreignKeyExpression)
 				.HasConstraintName(
 					foreignKeyNaming.GetConstraintName(
 						descendantTableName,
