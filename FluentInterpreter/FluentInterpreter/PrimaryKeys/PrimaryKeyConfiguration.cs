@@ -9,8 +9,6 @@ namespace FluentInterpreter.PrimaryKeys
 
 	public static class PrimaryKeyConfiguration
 	{
-		// TODO: Add index.
-		// TODO: Add method to the Properties -> .IsPrimaryKey(); .IsForeignKey();
 		public static void PrimaryKey<T>(
 			this EntityTypeBuilder<T> builder,
 			Expression<Func<T, object>> primaryKeyExpression)
@@ -37,7 +35,15 @@ namespace FluentInterpreter.PrimaryKeys
 			ITableNaming tableNaming,
 			IPrimaryKeyNaming primaryKeyNaming)
 			where T : class
-			=> builder.HasKey(primaryKeyExpression)
-				.HasName(primaryKeyNaming.GetConstraintName(tableNaming.GetTableName(typeof(T))));
+		{
+			string[] properties = Common.GetPropertyNames(primaryKeyExpression);
+
+			builder.HasKey(primaryKeyExpression)
+				.HasName(primaryKeyNaming.GetConstraintName(tableNaming.GetTableName(typeof(T)), properties));
+			
+			// TODO: Add indexes.
+			// Indexes should be added for every property that is not part of the clustered index.
+			// Custom index implementation overrides the one made by convention (EF Core).
+		}
 	}
 }

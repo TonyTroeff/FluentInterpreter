@@ -13,71 +13,70 @@ namespace FluentInterpreter.ForeignKeys
 	{
 		public static void ManyToOne<TDescendant, TPrincipal>(
 			this EntityTypeBuilder<TDescendant> builder,
-			Expression<Func<TDescendant, IEnumerable<TPrincipal>>> principalNavigationPropertyExpression,
-			Expression<Func<TPrincipal, TDescendant>> descendantNavigationPropertyExpression,
-			Expression<Func<TPrincipal, object>> foreignKeyPropertyExpression)
+			Expression<Func<TDescendant, IEnumerable<TPrincipal>>> principal,
+			Expression<Func<TPrincipal, TDescendant>> descendant,
+			Expression<Func<TPrincipal, object>> foreignKeyExpression)
 			where TDescendant : class
 			where TPrincipal : class
 			=> builder.ManyToOne(
-				principalNavigationPropertyExpression,
-				descendantNavigationPropertyExpression,
-				foreignKeyPropertyExpression,
+				principal,
+				descendant,
+				foreignKeyExpression,
 				new DefaultTableNaming(),
 				new DefaultForeignKeyNaming());
 
 		public static void ManyToOne<TDescendant, TPrincipal>(
 			this EntityTypeBuilder<TDescendant> builder,
-			Expression<Func<TDescendant, IEnumerable<TPrincipal>>> principalNavigationPropertyExpression,
-			Expression<Func<TPrincipal, TDescendant>> descendantNavigationPropertyExpression,
-			Expression<Func<TPrincipal, object>> foreignKeyPropertyExpression,
+			Expression<Func<TDescendant, IEnumerable<TPrincipal>>> principal,
+			Expression<Func<TPrincipal, TDescendant>> descendant,
+			Expression<Func<TPrincipal, object>> foreignKeyExpression,
 			ITableNaming tableNaming)
 			where TDescendant : class
 			where TPrincipal : class
 			=> builder.ManyToOne(
-				principalNavigationPropertyExpression,
-				descendantNavigationPropertyExpression,
-				foreignKeyPropertyExpression,
+				principal,
+				descendant,
+				foreignKeyExpression,
 				tableNaming,
 				new DefaultForeignKeyNaming());
 
 		public static void ManyToOne<TDescendant, TPrincipal>(
 			this EntityTypeBuilder<TDescendant> builder,
-			Expression<Func<TDescendant, IEnumerable<TPrincipal>>> principalNavigationPropertyExpression,
-			Expression<Func<TPrincipal, TDescendant>> descendantNavigationPropertyExpression,
-			Expression<Func<TPrincipal, object>> foreignKeyPropertyExpression,
+			Expression<Func<TDescendant, IEnumerable<TPrincipal>>> principal,
+			Expression<Func<TPrincipal, TDescendant>> descendant,
+			Expression<Func<TPrincipal, object>> foreignKeyExpression,
 			IForeignKeyNaming foreignKeyNaming)
 			where TDescendant : class
 			where TPrincipal : class
 			=> builder.ManyToOne(
-				principalNavigationPropertyExpression,
-				descendantNavigationPropertyExpression,
-				foreignKeyPropertyExpression,
+				principal,
+				descendant,
+				foreignKeyExpression,
 				new DefaultTableNaming(),
 				foreignKeyNaming);
 
 		public static void ManyToOne<TDescendant, TPrincipal>(
 			this EntityTypeBuilder<TDescendant> builder,
-			Expression<Func<TDescendant, IEnumerable<TPrincipal>>> principalNavigationPropertyExpression,
-			Expression<Func<TPrincipal, TDescendant>> descendantNavigationPropertyExpression,
-			Expression<Func<TPrincipal, object>> foreignKeyPropertyExpression,
+			Expression<Func<TDescendant, IEnumerable<TPrincipal>>> principal,
+			Expression<Func<TPrincipal, TDescendant>> descendant,
+			Expression<Func<TPrincipal, object>> foreignKeyExpression,
 			ITableNaming tableNaming,
 			IForeignKeyNaming foreignKeyNaming)
 			where TDescendant : class
 			where TPrincipal : class
 		{
-			if (descendantNavigationPropertyExpression.Body is MemberExpression == false)
-				throw new NotMemberExpressionException(nameof(descendantNavigationPropertyExpression));
-			if (principalNavigationPropertyExpression.Body is MemberExpression == false)
-				throw new ArgumentException(nameof(principalNavigationPropertyExpression));
+			if (descendant.Body is MemberExpression == false)
+				throw new NotMemberExpressionException(nameof(descendant));
+			if (principal.Body is MemberExpression == false) throw new ArgumentException(nameof(principal));
 
-			string[] foreignKeyPropertyName = Common.GetPropertyNames(foreignKeyPropertyExpression);
+			string[] foreignKeyPropertyName = Common.GetPropertyNames(foreignKeyExpression);
 
 			string descendantTableName = tableNaming.GetTableName(typeof(TDescendant));
 			string principalTableName = tableNaming.GetTableName(typeof(TPrincipal));
 
-			builder.HasMany(principalNavigationPropertyExpression)
-				.WithOne(descendantNavigationPropertyExpression)
-				.HasForeignKey(foreignKeyPropertyExpression)
+			builder.HasMany(principal)
+				.WithOne(descendant)
+				.HasForeignKey(foreignKeyExpression)
 				.HasConstraintName(
 					foreignKeyNaming.GetConstraintName(
 						descendantTableName,

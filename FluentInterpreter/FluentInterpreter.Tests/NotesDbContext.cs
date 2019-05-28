@@ -5,6 +5,9 @@ namespace FluentInterpreter.Tests
 
 	public class NotesDbContext : DbContext
 	{
+		public NotesDbContext() { }
+		public NotesDbContext(DbContextOptions options) : base(options) { }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 			=> optionsBuilder.UseSqlServer(@"Server = .\SQLEXPRESS; Database = Notes; Integrated Security = True");
 
@@ -12,6 +15,7 @@ namespace FluentInterpreter.Tests
 		{
 			modelBuilder.ApplyConfiguration(new NoteConfiguration());
 			modelBuilder.ApplyConfiguration(new UserConfiguration());
+			modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 			modelBuilder.ApplyConfiguration(new NoteCategoryConfiguration());
 		}
 	}

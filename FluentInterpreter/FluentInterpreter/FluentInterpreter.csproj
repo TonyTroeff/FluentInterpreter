@@ -10,8 +10,4 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.4" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Tables" />
-    </ItemGroup>
-
 </Project>

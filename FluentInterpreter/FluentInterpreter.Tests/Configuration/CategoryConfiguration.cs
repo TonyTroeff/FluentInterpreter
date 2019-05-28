@@ -6,12 +6,12 @@ namespace FluentInterpreter.Tests.Configuration
 	using PrimaryKeys;
 	using Tables;
 
-	public class UserConfiguration : IEntityTypeConfiguration<User>
+	public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 	{
-		public void Configure(EntityTypeBuilder<User> builder)
+		public void Configure(EntityTypeBuilder<Category> builder)
 		{
 			builder.Name();
-			builder.PrimaryKey(u => u.Id);
+			builder.PrimaryKey(c => c.Id);
 		}
 	}
 }
