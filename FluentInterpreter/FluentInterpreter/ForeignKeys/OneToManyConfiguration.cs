@@ -9,38 +9,38 @@ namespace FluentInterpreter.ForeignKeys
 
 	public static class OneToManyConfiguration
 	{
-		public static void OneToMany<TDescendant, TPrincipal>(
-			this EntityTypeBuilder<TDescendant> builder,
-			Expression<Func<TDescendant, TPrincipal>> descendant,
-			Expression<Func<TPrincipal, IEnumerable<TDescendant>>> principal,
-			Expression<Func<TDescendant, object>> foreignKeyExpression)
-			where TDescendant : class
+		public static ReferenceCollectionBuilder<TPrincipal, TDependent> OneToMany<TDependent, TPrincipal>(
+			this EntityTypeBuilder<TDependent> builder,
+			Expression<Func<TDependent, TPrincipal>> dependent,
+			Expression<Func<TPrincipal, IEnumerable<TDependent>>> principal,
+			Expression<Func<TDependent, object>> foreignKeyExpression)
+			where TDependent : class
 			where TPrincipal : class
 		{
 			string[] properties = Common.GetMembers(foreignKeyExpression);
-			builder.OneToMany(descendant, principal, properties);
+			return builder.OneToMany(dependent, principal, properties);
 		}
 
-		public static void OneToMany<TDescendant, TPrincipal>(
-			this EntityTypeBuilder<TDescendant> builder,
-			Expression<Func<TDescendant, TPrincipal>> descendant,
-			Expression<Func<TPrincipal, IEnumerable<TDescendant>>> principal,
+		public static ReferenceCollectionBuilder<TPrincipal, TDependent> OneToMany<TDependent, TPrincipal>(
+			this EntityTypeBuilder<TDependent> builder,
+			Expression<Func<TDependent, TPrincipal>> dependent,
+			Expression<Func<TPrincipal, IEnumerable<TDependent>>> principal,
 			params string[] properties)
-			where TDescendant : class
+			where TDependent : class
 			where TPrincipal : class
 		{
-			if (descendant.Body is MemberExpression == false)
-				throw new NotMemberExpressionException(nameof(descendant));
+			if (dependent.Body is MemberExpression == false)
+				throw new NotMemberExpressionException(nameof(dependent));
 			if (principal.Body is MemberExpression == false) throw new NotMemberExpressionException(nameof(principal));
 
-			string descendantTableName = NamingServices.TableNaming.GetTableName(typeof(TDescendant));
+			string dependentTableName = NamingServices.TableNaming.GetTableName(typeof(TDependent));
 			string principalTableName = NamingServices.TableNaming.GetTableName(typeof(TPrincipal));
 			string foreignKeyName = NamingServices.ForeignKeyNaming.GetConstraintName(
-				descendantTableName,
+				dependentTableName,
 				principalTableName,
 				properties);
 
-			builder.HasOne(descendant)
+			return builder.HasOne(dependent)
 				.WithMany(principal)
 				.HasForeignKey(properties)
 				.HasConstraintName(foreignKeyName);

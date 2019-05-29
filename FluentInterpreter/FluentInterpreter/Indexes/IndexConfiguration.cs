@@ -7,19 +7,17 @@ namespace FluentInterpreter.Indexes
 
 	public static class IndexConfiguration
 	{
-		public static void Index<T>(this EntityTypeBuilder<T> builder, Expression<Func<T, object>> propertiesExpression)
+		public static IndexBuilder Index<T>(
+			this EntityTypeBuilder<T> builder,
+			Expression<Func<T, object>> propertiesExpression)
 			where T : class
-		{
-			string[] properties = Common.GetMembers(propertiesExpression);
+			=> builder.Index(propertiesExpression, null);
 
-			builder.Index(properties, null);
-		}
-
-		public static void Index<T>(this EntityTypeBuilder<T> builder, params string[] properties)
+		public static IndexBuilder Index<T>(this EntityTypeBuilder<T> builder, params string[] properties)
 			where T : class
 			=> builder.Index(properties, null);
 
-		public static void Index<T>(
+		public static IndexBuilder Index<T>(
 			this EntityTypeBuilder<T> builder,
 			Expression<Func<T, object>> propertiesExpression,
 			string sqlFilter)
@@ -27,16 +25,16 @@ namespace FluentInterpreter.Indexes
 		{
 			string[] properties = Common.GetMembers(propertiesExpression);
 
-			builder.Index(properties, sqlFilter);
+			return builder.Index(properties, sqlFilter);
 		}
 
-		public static void Index<T>(this EntityTypeBuilder<T> builder, string[] properties, string sqlFilter)
+		public static IndexBuilder Index<T>(this EntityTypeBuilder<T> builder, string[] properties, string sqlFilter)
 			where T : class
 		{
 			string tableName = NamingServices.TableNaming.GetTableName(typeof(T));
 			string indexName = NamingServices.IndexNaming.GetConstraintName(tableName, properties);
 
-			builder.HasIndex(properties)
+			return builder.HasIndex(properties)
 				.HasName(indexName)
 				.HasFilter(sqlFilter);
 		}

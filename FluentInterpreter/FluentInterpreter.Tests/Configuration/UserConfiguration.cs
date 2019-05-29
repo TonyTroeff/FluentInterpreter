@@ -5,6 +5,7 @@ namespace FluentInterpreter.Tests.Configuration
 	using Models;
 	using PrimaryKeys;
 	using Tables;
+	using UniqueIndexes;
 
 	public class UserConfiguration : IEntityTypeConfiguration<User>
 	{
@@ -12,6 +13,7 @@ namespace FluentInterpreter.Tests.Configuration
 		{
 			builder.Name();
 			builder.PrimaryKey(u => u.Id);
+			builder.Unique(u => u.Username);
 		}
 	}
 }

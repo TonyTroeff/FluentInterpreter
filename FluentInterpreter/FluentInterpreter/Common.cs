@@ -42,8 +42,9 @@
 		{
 			List<MemberInfo> properties = new List<MemberInfo>();
 
-			if ((expression.Body as UnaryExpression)?.Operand is MemberExpression memberExpression)
-				properties.Add(memberExpression.Member);
+			if (expression.Body is MemberExpression memberExpression) properties.Add(memberExpression.Member);
+			else if ((expression.Body as UnaryExpression)?.Operand is MemberExpression unaryExpression)
+				properties.Add(unaryExpression.Member);
 			else if (expression.Body is NewExpression newExpression) properties.AddRange(newExpression.Members);
 			else throw new InvalidKeyExpressionException(nameof(expression));
 
