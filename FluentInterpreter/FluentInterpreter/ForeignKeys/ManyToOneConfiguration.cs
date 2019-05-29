@@ -17,11 +17,21 @@ namespace FluentInterpreter.ForeignKeys
 			where TDescendant : class
 			where TPrincipal : class
 		{
+			string[] properties = Common.GetMembers(foreignKeyExpression);
+			builder.ManyToOne(principal,descendant,properties);
+		}
+		
+		public static void ManyToOne<TDescendant, TPrincipal>(
+			this EntityTypeBuilder<TDescendant> builder,
+			Expression<Func<TDescendant, IEnumerable<TPrincipal>>> principal,
+			Expression<Func<TPrincipal, TDescendant>> descendant,
+			params string[] properties)
+			where TDescendant : class
+			where TPrincipal : class
+		{
 			if (descendant.Body is MemberExpression == false)
 				throw new NotMemberExpressionException(nameof(descendant));
 			if (principal.Body is MemberExpression == false) throw new ArgumentException(nameof(principal));
-
-			string[] properties = Common.GetPropertyNames(foreignKeyExpression);
 
 			string descendantTableName = NamingServices.TableNaming.GetTableName(typeof(TDescendant));
 			string principalTableName = NamingServices.TableNaming.GetTableName(typeof(TPrincipal));
@@ -32,7 +42,7 @@ namespace FluentInterpreter.ForeignKeys
 
 			builder.HasMany(principal)
 				.WithOne(descendant)
-				.HasForeignKey(foreignKeyExpression)
+				.HasForeignKey(properties)
 				.HasConstraintName(foreignKeyName);
 		}
 	}

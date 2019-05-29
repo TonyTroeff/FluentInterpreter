@@ -2,6 +2,7 @@ namespace FluentInterpreter.PrimaryKeys
 {
 	using System;
 	using System.Linq.Expressions;
+	using Indexes;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,17 +13,22 @@ namespace FluentInterpreter.PrimaryKeys
 			Expression<Func<T, object>> primaryKeyExpression)
 			where T : class
 		{
-			string[] properties = Common.GetPropertyNames(primaryKeyExpression);
-
+			string[] properties = Common.GetMembers(primaryKeyExpression);
+			builder.PrimaryKey(properties);
+		}
+		
+		public static void PrimaryKey<T>(
+			this EntityTypeBuilder<T> builder,
+			params string[] properties)
+			where T : class
+		{
 			string tableName = NamingServices.TableNaming.GetTableName(typeof(T));
 			string primaryKeyName = NamingServices.PrimaryKeyNaming.GetConstraintName(tableName, properties);
 
-			builder.HasKey(primaryKeyExpression)
+			builder.HasKey(properties)
 				.HasName(primaryKeyName);
 
-			// TODO: Add indexes.
-			// Indexes should be added for every property that is not part of the clustered index.
-			// Custom index implementation overrides the one made by convention (EF Core).
+			for (int i = 1; i < properties.Length; i++) builder.Index(properties[i]);
 		}
 	}
 }
