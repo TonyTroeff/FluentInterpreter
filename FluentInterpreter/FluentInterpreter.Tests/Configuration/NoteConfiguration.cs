@@ -13,6 +13,10 @@ namespace FluentInterpreter.Tests.Configuration
 			builder.Name();
 			builder.PrimaryKey(n => n.Id);
 			builder.OneToMany(n => n.User, u => u.Notes, n => n.UserId);
+
+			builder.Property(n => n.Text)
+				.Name()
+				.StringType();
 		}
 	}
 }

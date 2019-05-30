@@ -33,7 +33,7 @@ namespace FluentInterpreter.DatabaseConfiguration
 			Common.CheckParameters(properties);
 
 			if (dependent.Body is MemberExpression == false) throw new NotMemberExpressionException(nameof(dependent));
-			if (principal.Body is MemberExpression == false) throw new ArgumentException(nameof(principal));
+			if (principal.Body is MemberExpression == false) throw new NotMemberExpressionException(nameof(principal));
 
 			string dependentTableName = NamingServices.TableNaming.GetTableName(typeof(TDependent));
 			string principalTableName = NamingServices.TableNaming.GetTableName(typeof(TPrincipal));

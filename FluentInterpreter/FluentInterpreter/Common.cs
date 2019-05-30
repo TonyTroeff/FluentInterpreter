@@ -1,4 +1,4 @@
-﻿namespace FluentInterpreter.DatabaseConfiguration
+﻿namespace FluentInterpreter
 {
 	using System;
 	using System.Collections.Generic;
@@ -9,12 +9,6 @@
 
 	public static class Common
 	{
-		public const string GUID_TYPE = "uniqueidentifier";
-		public const string BOOL_TYPE = "bit";
-		public const string BYTE_TYPE = "tinyint";
-		public const string DATETIME_TYPE = "datetime2";
-		public const string INTEGER_TYPE = "int";
-
 		public static string GetStringType(int length = -1, bool isUnicode = true, bool isFixedLength = false)
 		{
 			string type = "";
