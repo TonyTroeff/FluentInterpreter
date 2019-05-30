@@ -6,8 +6,6 @@
 	using System.Linq.Expressions;
 	using System.Reflection;
 	using Exceptions;
-	using Microsoft.EntityFrameworkCore;
-	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 	public static class Common
 	{
@@ -29,15 +27,6 @@
 			return type;
 		}
 
-		public static PropertyBuilder<T> Configure<T>(
-			this PropertyBuilder<T> builder,
-			string name,
-			string type,
-			bool isRequired)
-			=> builder.HasColumnName(name)
-				.HasColumnType(type)
-				.IsRequired(isRequired);
-
 		public static string[] GetMembers<T>(Expression<Func<T, object>> expression)
 		{
 			List<MemberInfo> properties = new List<MemberInfo>();
@@ -50,6 +39,12 @@
 
 			return properties.Select(m => m.Name)
 				.ToArray();
+		}
+
+		public static void CheckParameters(params Array[] parameters)
+		{
+			if (parameters.Any(parameter => parameter == null || parameter.Length == 0))
+				throw new InvalidArgumentException();
 		}
 	}
 }

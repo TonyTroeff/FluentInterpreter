@@ -32,6 +32,8 @@ namespace FluentInterpreter.DatabaseConfiguration
 		public static IndexBuilder Index<T>(this EntityTypeBuilder<T> builder, string[] properties, string sqlFilter)
 			where T : class
 		{
+			Common.CheckParameters(properties);
+
 			string tableName = NamingServices.TableNaming.GetTableName(typeof(T));
 			string indexName = NamingServices.IndexNaming.GetConstraintName(tableName, properties);
 

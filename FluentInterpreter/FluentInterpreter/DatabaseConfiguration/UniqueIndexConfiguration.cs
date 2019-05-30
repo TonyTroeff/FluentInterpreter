@@ -2,6 +2,7 @@ namespace FluentInterpreter.DatabaseConfiguration
 {
 	using System;
 	using System.Linq.Expressions;
+	using Exceptions;
 	using NamingConvention;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -32,6 +33,8 @@ namespace FluentInterpreter.DatabaseConfiguration
 		public static IndexBuilder Unique<T>(this EntityTypeBuilder<T> builder, string[] properties, string sqlFilter)
 			where T : class
 		{
+			Common.CheckParameters(properties);
+			
 			string taleName = NamingServices.TableNaming.GetTableName(typeof(T));
 			string uniqueIndexName = NamingServices.UniqueIndexNaming.GetConstraintName(taleName, properties);
 

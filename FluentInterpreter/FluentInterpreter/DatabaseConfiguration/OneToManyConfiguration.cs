@@ -30,6 +30,8 @@ namespace FluentInterpreter.DatabaseConfiguration
 			where TDependent : class
 			where TPrincipal : class
 		{
+			Common.CheckParameters(properties);
+
 			if (dependent.Body is MemberExpression == false) throw new NotMemberExpressionException(nameof(dependent));
 			if (principal.Body is MemberExpression == false) throw new NotMemberExpressionException(nameof(principal));
 
