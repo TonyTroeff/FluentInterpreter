@@ -1,4 +1,4 @@
-﻿namespace FluentInterpreter
+﻿namespace FluentInterpreter.DatabaseConfiguration
 {
 	using System;
 	using System.Collections.Generic;

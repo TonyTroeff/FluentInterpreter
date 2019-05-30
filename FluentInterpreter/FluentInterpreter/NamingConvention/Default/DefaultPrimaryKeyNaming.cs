@@ -1,8 +1,8 @@
-namespace FluentInterpreter.Indexes.NamingConvention
+namespace FluentInterpreter.NamingConvention.Default
 {
 	using Exceptions;
 
-	public class DefaultIndexNaming : IIndexNaming
+	public class DefaultPrimaryKeyNaming : IPrimaryKeyNaming
 	{
 		public string GetConstraintName(string tableName, string[] properties)
 		{
@@ -11,7 +11,7 @@ namespace FluentInterpreter.Indexes.NamingConvention
 				|| properties.Length == 0) throw new InvalidArgumentException(nameof(properties));
 
 			return
-				$"{Convention.INDEX_PREFIX}{Convention.DELIMITER}{tableName}{Convention.DELIMITER}{string.Join(Convention.DELIMITER, properties)}";
+				$"{Convention.PRIMARY_KEY_PREFIX}{Convention.DELIMITER}{tableName}{Convention.DELIMITER}{string.Join(Convention.DELIMITER, properties)}";
 		}
 	}
 }

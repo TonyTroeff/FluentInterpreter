@@ -1,7 +1,8 @@
-namespace FluentInterpreter.Indexes
+namespace FluentInterpreter.DatabaseConfiguration
 {
 	using System;
 	using System.Linq.Expressions;
+	using NamingConvention;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

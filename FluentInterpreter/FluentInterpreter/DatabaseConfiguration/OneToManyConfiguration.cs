@@ -1,4 +1,4 @@
-namespace FluentInterpreter.ForeignKeys
+namespace FluentInterpreter.DatabaseConfiguration
 {
 	using System;
 	using System.Collections.Generic;
@@ -6,6 +6,7 @@ namespace FluentInterpreter.ForeignKeys
 	using Exceptions;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
+	using NamingConvention;
 
 	public static class OneToManyConfiguration
 	{
@@ -29,8 +30,7 @@ namespace FluentInterpreter.ForeignKeys
 			where TDependent : class
 			where TPrincipal : class
 		{
-			if (dependent.Body is MemberExpression == false)
-				throw new NotMemberExpressionException(nameof(dependent));
+			if (dependent.Body is MemberExpression == false) throw new NotMemberExpressionException(nameof(dependent));
 			if (principal.Body is MemberExpression == false) throw new NotMemberExpressionException(nameof(principal));
 
 			string dependentTableName = NamingServices.TableNaming.GetTableName(typeof(TDependent));

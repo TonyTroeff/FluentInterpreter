@@ -1,10 +1,10 @@
-namespace FluentInterpreter.PrimaryKeys
+namespace FluentInterpreter.DatabaseConfiguration
 {
 	using System;
 	using System.Linq.Expressions;
-	using Indexes;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
+	using NamingConvention;
 
 	public static class PrimaryKeyConfiguration
 	{
@@ -16,10 +16,8 @@ namespace FluentInterpreter.PrimaryKeys
 			string[] properties = Common.GetMembers(primaryKeyExpression);
 			return builder.PrimaryKey(properties);
 		}
-		
-		public static KeyBuilder PrimaryKey<T>(
-			this EntityTypeBuilder<T> builder,
-			params string[] properties)
+
+		public static KeyBuilder PrimaryKey<T>(this EntityTypeBuilder<T> builder, params string[] properties)
 			where T : class
 		{
 			string tableName = NamingServices.TableNaming.GetTableName(typeof(T));

@@ -1,11 +1,9 @@
 namespace FluentInterpreter.Tests.Configuration
 {
+	using DatabaseConfiguration;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 	using Models;
-	using PrimaryKeys;
-	using Tables;
-	using UniqueIndexes;
 
 	public class UserConfiguration : IEntityTypeConfiguration<User>
 	{

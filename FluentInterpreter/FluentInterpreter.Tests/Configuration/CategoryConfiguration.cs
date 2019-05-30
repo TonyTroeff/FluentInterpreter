@@ -1,10 +1,9 @@
 namespace FluentInterpreter.Tests.Configuration
 {
+	using DatabaseConfiguration;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 	using Models;
-	using PrimaryKeys;
-	using Tables;
 
 	public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 	{

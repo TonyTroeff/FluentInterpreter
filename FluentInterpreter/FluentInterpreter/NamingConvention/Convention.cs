@@ -1,4 +1,4 @@
-namespace FluentInterpreter
+namespace FluentInterpreter.NamingConvention
 {
 	public static class Convention
 	{

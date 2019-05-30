@@ -1,4 +1,4 @@
-namespace FluentInterpreter.PrimaryKeys.NamingConvention
+namespace FluentInterpreter.NamingConvention
 {
 	public interface IPrimaryKeyNaming
 	{

@@ -1,4 +1,4 @@
-namespace FluentInterpreter.Tables.NamingConvention
+namespace FluentInterpreter.NamingConvention
 {
 	using System;
 

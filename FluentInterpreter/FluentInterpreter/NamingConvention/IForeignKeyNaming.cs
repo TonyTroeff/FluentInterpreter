@@ -1,4 +1,4 @@
-namespace FluentInterpreter.ForeignKeys.NamingConvention
+namespace FluentInterpreter.NamingConvention
 {
 	public interface IForeignKeyNaming
 	{

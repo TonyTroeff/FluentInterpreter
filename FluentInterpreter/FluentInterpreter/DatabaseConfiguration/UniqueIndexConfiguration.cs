@@ -1,8 +1,8 @@
-namespace FluentInterpreter.UniqueIndexes
+namespace FluentInterpreter.DatabaseConfiguration
 {
 	using System;
 	using System.Linq.Expressions;
-	using Indexes;
+	using NamingConvention;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

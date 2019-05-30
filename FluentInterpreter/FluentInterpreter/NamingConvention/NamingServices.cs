@@ -1,10 +1,6 @@
-namespace FluentInterpreter
+namespace FluentInterpreter.NamingConvention
 {
-	using ForeignKeys.NamingConvention;
-	using Indexes.NamingConvention;
-	using PrimaryKeys.NamingConvention;
-	using Tables.NamingConvention;
-	using UniqueIndexes.NamingConvention;
+	using Default;
 
 	public static class NamingServices
 	{

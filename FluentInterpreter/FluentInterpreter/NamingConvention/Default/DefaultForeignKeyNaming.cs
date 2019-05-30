@@ -1,6 +1,7 @@
-namespace FluentInterpreter.ForeignKeys.NamingConvention
+namespace FluentInterpreter.NamingConvention.Default
 {
 	using Exceptions;
+	using NamingConvention;
 
 	public class DefaultForeignKeyNaming : IForeignKeyNaming
 	{

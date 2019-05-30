@@ -1,4 +1,4 @@
-namespace FluentInterpreter.Indexes.NamingConvention
+namespace FluentInterpreter.NamingConvention
 {
 	public interface IIndexNaming
 	{

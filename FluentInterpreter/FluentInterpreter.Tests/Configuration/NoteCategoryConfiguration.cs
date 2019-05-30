@@ -1,11 +1,9 @@
 namespace FluentInterpreter.Tests.Configuration
 {
-	using ForeignKeys;
+	using DatabaseConfiguration;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 	using Models;
-	using PrimaryKeys;
-	using Tables;
 
 	public class NoteCategoryConfiguration : IEntityTypeConfiguration<NoteCategory>
 	{
