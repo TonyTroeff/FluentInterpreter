@@ -6,6 +6,7 @@
         <Description>NuGet package that adds more configuration features to the FluentAPI.</Description>
         <RepositoryUrl>https://bitbucket.org/TonyTroeff/fluentinterpreter</RepositoryUrl>
         <PackageVersion>1.0.0</PackageVersion>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
     <ItemGroup>
