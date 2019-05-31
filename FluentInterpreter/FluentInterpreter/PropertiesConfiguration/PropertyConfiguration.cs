@@ -6,15 +6,6 @@ namespace FluentInterpreter.PropertiesConfiguration
 
 	public static class PropertyConfiguration
 	{
-		// public static PropertyBuilder<T> Configure<T>(
-		// 	this PropertyBuilder<T> builder,
-		// 	string name,
-		// 	string type,
-		// 	bool isRequired)
-		// 	=> builder.HasColumnName(name)
-		// 		.HasColumnType(type)
-		// 		.IsRequired(isRequired);
-
 		public static PropertyBuilder<T> Name<T>(this PropertyBuilder<T> builder)
 			=> builder.Name(NamingServices.PropertyNaming.GetPropertyName(builder.Metadata.Name));
 
