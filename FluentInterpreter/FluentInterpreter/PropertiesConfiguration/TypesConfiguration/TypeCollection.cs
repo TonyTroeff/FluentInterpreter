@@ -19,6 +19,11 @@ namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
 			this._types[type] = name;
 		}
 
-		public string GetType(Type type) => this._types[Nullable.GetUnderlyingType(type) ?? type];
+		public string GetType(Type type)
+		{
+			type = Nullable.GetUnderlyingType(type) ?? type;
+
+			return this._types[type.IsEnum ? Enum.GetUnderlyingType(type) : type];
+		}
 	}
 }
