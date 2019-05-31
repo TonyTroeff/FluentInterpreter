@@ -2,9 +2,9 @@ namespace FluentInterpreter.DatabaseConfiguration
 {
 	using System;
 	using System.Linq.Expressions;
-	using NamingConvention;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
+	using NamingConvention;
 
 	public static class IndexConfiguration
 	{
@@ -32,7 +32,7 @@ namespace FluentInterpreter.DatabaseConfiguration
 		public static IndexBuilder Index<T>(this EntityTypeBuilder<T> builder, string[] properties, string sqlFilter)
 			where T : class
 		{
-			Common.CheckParameters(properties);
+			Common.CheckStrings(properties);
 
 			string tableName = NamingServices.TableNaming.GetTableName(typeof(T));
 			string indexName = NamingServices.IndexNaming.GetConstraintName(tableName, properties);

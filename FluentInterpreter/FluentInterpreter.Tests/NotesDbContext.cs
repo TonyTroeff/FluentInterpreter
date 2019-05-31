@@ -6,8 +6,6 @@ namespace FluentInterpreter.Tests
 
 	public sealed class NotesDbContext : DbContext
 	{
-		public NotesDbContext() { }
-
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 			=> optionsBuilder.UseSqlServer(@"Server = .\SQLEXPRESS; Database = Notes; Integrated Security = True");
 

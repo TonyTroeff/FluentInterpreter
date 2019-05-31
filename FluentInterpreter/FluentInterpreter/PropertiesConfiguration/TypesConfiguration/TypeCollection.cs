@@ -3,29 +3,22 @@ namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
-	using System.Linq;
 
-	public class TypeCollection : IEnumerable<TypeInfo>
+	public class TypeCollection : IEnumerable<KeyValuePair<Type, string>>
 	{
-		private readonly List<TypeInfo> _types = new List<TypeInfo>();
+		private readonly Dictionary<Type, string> _types = new Dictionary<Type, string>();
+
+		public IEnumerator<KeyValuePair<Type, string>> GetEnumerator() => this._types.GetEnumerator();
+		IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
 		public void Add(Type type, string name)
 		{
-			// TODO: Validation.
+			Common.CheckForNull(type);
+			Common.CheckStrings(name);
 
-			TypeInfo typeInfo = this._types.SingleOrDefault(ti => ti.Type == type);
-
-			if (typeInfo != null) this._types.Remove(typeInfo);
-			else typeInfo = new TypeInfo(type, name);
-
-			this._types.Add(typeInfo);
+			this._types[type] = name;
 		}
 
-		public string GetTypeName(Type type)
-			=> this._types.SingleOrDefault(ti => ti.Type == type)
-				?.Name;
-
-		public IEnumerator<TypeInfo> GetEnumerator() => this._types.GetEnumerator();
-		IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+		public string GetType(Type type) => this._types[type];
 	}
 }

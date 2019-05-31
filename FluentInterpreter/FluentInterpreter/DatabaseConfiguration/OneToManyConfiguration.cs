@@ -3,7 +3,6 @@ namespace FluentInterpreter.DatabaseConfiguration
 	using System;
 	using System.Collections.Generic;
 	using System.Linq.Expressions;
-	using Exceptions;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
 	using NamingConvention;
@@ -30,10 +29,9 @@ namespace FluentInterpreter.DatabaseConfiguration
 			where TDependent : class
 			where TPrincipal : class
 		{
-			Common.CheckParameters(properties);
-
-			if (dependent.Body is MemberExpression == false) throw new NotMemberExpressionException(nameof(dependent));
-			if (principal.Body is MemberExpression == false) throw new NotMemberExpressionException(nameof(principal));
+			Common.CheckStrings(properties);
+			Common.CheckMemberExpression(dependent.Body);
+			Common.CheckMemberExpression(principal.Body);
 
 			string dependentTableName = NamingServices.TableNaming.GetTableName(typeof(TDependent));
 			string principalTableName = NamingServices.TableNaming.GetTableName(typeof(TPrincipal));

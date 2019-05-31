@@ -9,18 +9,6 @@
 
 	public static class Common
 	{
-		public static string GetStringType(int length = -1, bool isUnicode = true, bool isFixedLength = false)
-		{
-			string type = "";
-
-			if (isUnicode) type += "n";
-			if (isFixedLength == false) type += "var";
-
-			type += $"char({(length == -1 ? "max" : length.ToString())})";
-
-			return type;
-		}
-
 		public static string[] GetMembers<T>(Expression<Func<T, object>> expression)
 		{
 			List<MemberInfo> properties = new List<MemberInfo>();
@@ -35,10 +23,21 @@
 				.ToArray();
 		}
 
-		public static void CheckParameters(params Array[] parameters)
+		public static void CheckStrings(params string[] parameters)
 		{
-			if (parameters.Any(parameter => parameter == null || parameter.Length == 0))
-				throw new InvalidArgumentException();
+			if (parameters == null
+				|| parameters.Length <= 0
+				|| parameters.Any(string.IsNullOrWhiteSpace)) throw new InvalidArgumentException();
+		}
+
+		public static void CheckForNull(object obj)
+		{
+			if (obj == null) throw new InvalidArgumentException();
+		}
+
+		public static void CheckMemberExpression(Expression expression)
+		{
+			if (expression is MemberExpression == false) throw new NotMemberExpressionException();
 		}
 	}
 }

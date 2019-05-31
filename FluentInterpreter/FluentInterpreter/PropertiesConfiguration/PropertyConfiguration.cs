@@ -20,20 +20,21 @@ namespace FluentInterpreter.PropertiesConfiguration
 
 		public static PropertyBuilder<T> Name<T>(this PropertyBuilder<T> builder, string name)
 		{
-			Common.CheckParameters(name.ToCharArray());
+			Common.CheckStrings(name);
 			return builder.HasColumnName(name);
 		}
 
-		// TODO: Check provider;
 		public static PropertyBuilder<T> DefinedType<T>(this PropertyBuilder<T> builder)
 		{
-			string type = Provider.TypeResolver.DefinedTypes.GetTypeName(typeof(T));
+			string type = Provider.GetTypeResolver()
+				.DefinedTypes.GetType(typeof(T));
 			return builder.Type(type);
 		}
 
 		public static PropertyBuilder<T> MoneyType<T>(this PropertyBuilder<T> builder)
 		{
-			string type = Provider.TypeResolver.GetMoneyType();
+			string type = Provider.GetTypeResolver()
+				.GetMoneyType();
 			return builder.Type(type);
 		}
 
@@ -43,7 +44,8 @@ namespace FluentInterpreter.PropertiesConfiguration
 			bool isUnicode = true,
 			bool isFixedLength = false)
 		{
-			string type = Provider.TypeResolver.GetStringType(length, isUnicode, isFixedLength);
+			string type = Provider.GetTypeResolver()
+				.GetStringType(length, isUnicode, isFixedLength);
 			return builder.Type(type);
 		}
 
@@ -52,13 +54,14 @@ namespace FluentInterpreter.PropertiesConfiguration
 			int precision,
 			int scale = 0)
 		{
-			string type = Provider.TypeResolver.GetFloatingPointType(precision, scale);
+			string type = Provider.GetTypeResolver()
+				.GetFloatingPointType(precision, scale);
 			return builder.Type(type);
 		}
 
 		public static PropertyBuilder<T> Type<T>(this PropertyBuilder<T> builder, string type)
 		{
-			Common.CheckParameters(type.ToCharArray());
+			Common.CheckStrings(type);
 			return builder.HasColumnType(type);
 		}
 	}

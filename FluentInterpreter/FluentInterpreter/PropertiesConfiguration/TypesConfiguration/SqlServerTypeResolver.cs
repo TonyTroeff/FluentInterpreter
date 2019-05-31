@@ -4,7 +4,7 @@ namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
 
 	public class SqlServerTypeResolver : ITypeResolver
 	{
-		public TypeCollection DefinedTypes { get; } = new TypeCollection()
+		public TypeCollection DefinedTypes { get; } = new TypeCollection
 		{
 			{ typeof(byte), "tinyint" },
 			{ typeof(short), "smallint" },

@@ -1,7 +1,5 @@
 namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
 {
-	using System.Globalization;
-
 	public interface ITypeResolver
 	{
 		TypeCollection DefinedTypes { get; }

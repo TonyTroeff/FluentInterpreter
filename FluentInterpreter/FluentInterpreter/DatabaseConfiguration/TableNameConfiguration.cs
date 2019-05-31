@@ -1,8 +1,8 @@
 namespace FluentInterpreter.DatabaseConfiguration
 {
-	using NamingConvention;
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore.Metadata.Builders;
+	using NamingConvention;
 
 	public static class TableNameConfiguration
 	{

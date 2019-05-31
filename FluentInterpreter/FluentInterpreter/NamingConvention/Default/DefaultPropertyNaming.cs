@@ -4,6 +4,11 @@ namespace FluentInterpreter.NamingConvention.Default
 
 	public class DefaultPropertyNaming : IPropertyNaming
 	{
-		public string GetPropertyName(string propertyName) => propertyName.Pascalize();
+		public string GetPropertyName(string propertyName)
+		{
+			Common.CheckStrings(propertyName);
+
+			return propertyName.Pascalize();
+		}
 	}
 }

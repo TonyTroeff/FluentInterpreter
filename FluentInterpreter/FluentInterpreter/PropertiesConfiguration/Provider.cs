@@ -1,23 +1,29 @@
 namespace FluentInterpreter.PropertiesConfiguration
 {
+	using System;
+	using Exceptions;
 	using Microsoft.EntityFrameworkCore;
 	using TypesConfiguration;
 
 	public static class Provider
 	{
-		public static ITypeResolver TypeResolver { get; private set; }
+		private static ITypeResolver _typeResolver;
 
 		public static void ConfigureTypeResolver(this DbContext context)
 		{
-			// TODO...
+			// TODO Create ITypeResolver implementations for other providers and add them to a switch.
 			if (context.Database.ProviderName == "Microsoft.EntityFrameworkCore.SqlServer")
-				TypeResolver = new SqlServerTypeResolver();
+				_typeResolver = new SqlServerTypeResolver();
 		}
 
 		public static void ConfigureTypeResolver(this DbContext context, ITypeResolver typeResolver)
+			=> _typeResolver = typeResolver ?? throw new ArgumentNullException(nameof(typeResolver));
+
+		public static ITypeResolver GetTypeResolver()
 		{
-			// TODO: Validation;
-			TypeResolver = typeResolver;
+			if (_typeResolver == null) throw new NoProviderConfiguredException();
+
+			return _typeResolver;
 		}
 	}
 }
