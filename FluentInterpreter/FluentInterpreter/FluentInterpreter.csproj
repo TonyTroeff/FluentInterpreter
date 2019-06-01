@@ -4,7 +4,7 @@
         <Title>FluentInterpreter</Title>
         <Authors>TonyTroeff</Authors>
         <Description>NuGet package that adds more configuration and naming features to the FluentAPI.</Description>
-        <RepositoryUrl>https://bitbucket.org/TonyTroeff/fluentinterpreter</RepositoryUrl>
+        <RepositoryUrl>https://github.com/TonyTroeff/FluentInterpreter</RepositoryUrl>
         <PackageVersion>1.1.0</PackageVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
