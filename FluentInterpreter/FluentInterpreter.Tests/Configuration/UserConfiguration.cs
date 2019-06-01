@@ -15,10 +15,12 @@ namespace FluentInterpreter.Tests.Configuration
 			builder.Unique(u => u.Username);
 			builder.Property(u => u.Profile)
 				.Name()
-				.DefinedType();
+				.ResolveType()
+				.Default(Profile.Common);
+			
 			builder.Property(u => u.Age)
 				.Name()
-				.DefinedType();
+				.ResolveType();
 		}
 	}
 }

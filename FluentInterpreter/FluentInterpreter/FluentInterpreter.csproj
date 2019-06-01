@@ -3,12 +3,12 @@
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <Title>FluentInterpreter</Title>
         <Authors>TonyTroeff</Authors>
-        <Description>NuGet package that adds more configuration features to the FluentAPI.</Description>
+        <Description>NuGet package that adds more configuration and naming features to the FluentAPI.</Description>
         <RepositoryUrl>https://bitbucket.org/TonyTroeff/fluentinterpreter</RepositoryUrl>
-        <PackageVersion>1.0.4</PackageVersion>
+        <PackageVersion>1.1.0</PackageVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageReleaseNotes>Fixed the TypeResolver logic for enums and nullables.</PackageReleaseNotes>
+        <PackageReleaseNotes></PackageReleaseNotes>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Humanizer.Core" Version="2.6.2" />

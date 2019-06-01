@@ -20,7 +20,7 @@ namespace FluentInterpreter.Tests.Configuration
 
 			builder.Property(n => n.Created)
 				.Name()
-				.DefinedType();
+				.ResolveType();
 		}
 	}
 }
