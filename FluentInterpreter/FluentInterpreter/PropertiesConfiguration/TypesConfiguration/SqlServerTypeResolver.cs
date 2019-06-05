@@ -27,7 +27,7 @@ namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
 			return type;
 		}
 
-		public string GetFloatingPointType(int precision, int scale = 0) => $"decimal({precision}, {scale})";
+		public string GetFloatingPointType(int precision = 18, int scale = 0) => $"decimal({precision}, {scale})";
 
 		public string GetMoneyType() => "money";
 	}

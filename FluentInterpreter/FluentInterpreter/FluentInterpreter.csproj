@@ -5,14 +5,14 @@
         <Authors>TonyTroeff</Authors>
         <Description>NuGet package that adds more configuration and naming features to the FluentAPI.</Description>
         <RepositoryUrl>https://github.com/TonyTroeff/FluentInterpreter</RepositoryUrl>
-        <PackageVersion>1.1.0</PackageVersion>
+        <PackageVersion>1.1.2</PackageVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageReleaseNotes></PackageReleaseNotes>
+        <PackageReleaseNotes>Added support for SQLite type resolving.</PackageReleaseNotes>
     </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="Humanizer.Core" Version="2.6.2" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.4" />
+      <PackageReference Include="Humanizer.Core" Version="2.1.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.0" />
     </ItemGroup>
 </Project>

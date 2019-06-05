@@ -19,6 +19,9 @@ namespace FluentInterpreter.PropertiesConfiguration
 				case "Microsoft.EntityFrameworkCore.SqlServer":
 					context.ConfigureTypeResolver(new SqlServerTypeResolver());
 					break;
+				case "Microsoft.EntityFrameworkCore.Sqlite":
+					context.ConfigureTypeResolver(new SQLiteTypeResolver());
+					break;
 				default: throw new NotRegisteredProvider(providerName);
 			}
 		}
