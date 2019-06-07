@@ -3,12 +3,12 @@
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <Title>FluentInterpreter</Title>
         <Authors>TonyTroeff</Authors>
-        <Description>NuGet package that adds more configuration and naming features to the FluentAPI.</Description>
+        <Description>FluentInterpreter is a NuGet package that adds more database configuration features to the Entity Framework Core.</Description>
         <RepositoryUrl>https://github.com/TonyTroeff/FluentInterpreter</RepositoryUrl>
-        <PackageVersion>1.1.2</PackageVersion>
+        <PackageVersion>1.2.0.0</PackageVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageReleaseNotes>Added support for SQLite type resolving.</PackageReleaseNotes>
+        <PackageReleaseNotes>First stable release of the FluentInterpreter.</PackageReleaseNotes>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Humanizer.Core" Version="2.1.0" />

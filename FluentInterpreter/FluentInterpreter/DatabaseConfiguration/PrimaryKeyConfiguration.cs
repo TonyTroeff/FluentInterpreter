@@ -20,6 +20,7 @@ namespace FluentInterpreter.DatabaseConfiguration
 		public static KeyBuilder PrimaryKey<T>(this EntityTypeBuilder<T> builder, params string[] properties)
 			where T : class
 		{
+			Common.CheckForNull(builder);
 			Common.CheckStrings(properties);
 
 			string tableName = NamingServices.TableNaming.GetTableName(typeof(T));

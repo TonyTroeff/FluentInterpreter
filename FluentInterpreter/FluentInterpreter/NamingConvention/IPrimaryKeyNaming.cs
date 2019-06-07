@@ -2,6 +2,6 @@ namespace FluentInterpreter.NamingConvention
 {
 	public interface IPrimaryKeyNaming
 	{
-		string GetConstraintName(string tableName, string[] properties);
+		string GetConstraintName(string tableName, string[] columns);
 	}
 }

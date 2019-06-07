@@ -29,6 +29,7 @@ namespace FluentInterpreter.DatabaseConfiguration
 			where TDependent : class
 			where TPrincipal : class
 		{
+			Common.CheckForNull(builder);
 			Common.CheckStrings(properties);
 			Common.CheckMemberExpression(dependent.Body);
 			Common.CheckMemberExpression(principal.Body);

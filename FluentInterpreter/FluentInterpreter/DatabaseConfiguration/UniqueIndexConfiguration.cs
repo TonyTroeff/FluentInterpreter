@@ -32,6 +32,7 @@ namespace FluentInterpreter.DatabaseConfiguration
 		public static IndexBuilder Unique<T>(this EntityTypeBuilder<T> builder, string[] properties, string sqlFilter)
 			where T : class
 		{
+			Common.CheckForNull(builder);
 			Common.CheckStrings(properties);
 
 			string taleName = NamingServices.TableNaming.GetTableName(typeof(T));

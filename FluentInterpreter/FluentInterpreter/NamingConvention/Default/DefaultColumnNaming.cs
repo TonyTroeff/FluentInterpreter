@@ -2,9 +2,9 @@ namespace FluentInterpreter.NamingConvention.Default
 {
 	using Humanizer;
 
-	public class DefaultPropertyNaming : IPropertyNaming
+	public class DefaultColumnNaming : IColumnNaming
 	{
-		public string GetPropertyName(string propertyName)
+		public string GetColumnName(string propertyName)
 		{
 			Common.CheckStrings(propertyName);
 

@@ -11,6 +11,8 @@
 	{
 		public static string[] GetMembers<T>(Expression<Func<T, object>> expression)
 		{
+			if (expression == null) throw new InvalidArgumentException();
+			
 			List<MemberInfo> properties = new List<MemberInfo>();
 
 			if (expression.Body is MemberExpression memberExpression) properties.Add(memberExpression.Member);

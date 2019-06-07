@@ -7,8 +7,5 @@ namespace FluentInterpreter.Exceptions
 		private const string DEFAULT_MESSAGE = "The argument is null or empty!";
 
 		public InvalidArgumentException() : base(DEFAULT_MESSAGE) { }
-
-		public InvalidArgumentException(string parameterName) : base(
-			$"{DEFAULT_MESSAGE} Parameter name: {parameterName}") { }
 	}
 }
