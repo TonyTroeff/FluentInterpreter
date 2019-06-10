@@ -54,7 +54,7 @@ namespace FluentInterpreter.PropertiesConfiguration
 
 		public static PropertyBuilder<T> FloatingPointType<T>(
 			this PropertyBuilder<T> builder,
-			int precision,
+			int precision = 18,
 			int scale = 0)
 		{
 			Common.CheckForNull(builder);
