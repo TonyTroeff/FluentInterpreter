@@ -31,7 +31,10 @@ namespace FluentInterpreter.PropertiesConfiguration
 					context.ConfigureTypeResolver(new SqlServerTypeResolver());
 					break;
 				case "Microsoft.EntityFrameworkCore.Sqlite":
-					context.ConfigureTypeResolver(new SQLiteTypeResolver());
+					context.ConfigureTypeResolver(new SqliteTypeResolver());
+					break;
+				case "Npgsql.EntityFrameworkCore.PostgreSQL":
+					context.ConfigureTypeResolver(new PostgreSqlTypeResolver());
 					break;
 				default: throw new NotRegisteredProvider(providerName);
 			}

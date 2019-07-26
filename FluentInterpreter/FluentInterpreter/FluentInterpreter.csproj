@@ -5,10 +5,10 @@
         <Authors>TonyTroeff</Authors>
         <Description>FluentInterpreter is a NuGet package that adds more database configuration features to the Entity Framework Core.</Description>
         <RepositoryUrl>https://github.com/TonyTroeff/FluentInterpreter</RepositoryUrl>
-        <PackageVersion>1.2.0</PackageVersion>
+        <PackageVersion>1.2.1</PackageVersion>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageReleaseNotes>First stable release of the FluentInterpreter.</PackageReleaseNotes>
+        <PackageReleaseNotes>Added support for PostgreSql database engine type resolving.</PackageReleaseNotes>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Humanizer.Core" Version="2.1.0" />

@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace FluentInterpreter.Tests
 {
 	using Configuration;
@@ -7,7 +9,7 @@ namespace FluentInterpreter.Tests
 	public sealed class NotesDbContext : DbContext
 	{
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-			=> optionsBuilder.UseSqlServer(@"Server = .\SQLEXPRESS; Database = Notes; Integrated Security = True");
+			=> optionsBuilder.UseNpgsql(ReadConnectionString("postgresql"));
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -18,5 +20,7 @@ namespace FluentInterpreter.Tests
 			modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 			modelBuilder.ApplyConfiguration(new NoteCategoryConfiguration());
 		}
+
+		private static string ReadConnectionString(string filename) => File.ReadAllText($"../../../{filename}.con");
 	}
 }
