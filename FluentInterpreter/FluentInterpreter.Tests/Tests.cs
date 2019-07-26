@@ -1,17 +1,21 @@
+#region
+
+using NUnit.Framework;
+
+#endregion
+
 namespace FluentInterpreter.Tests
 {
-	using NUnit.Framework;
+    [TestFixture]
+    public class Tests
+    {
+        [Test]
+        public void Test()
+        {
+            NotesDbContext notesDbContext = new NotesDbContext();
 
-	[TestFixture]
-	public class Tests
-	{
-		[Test]
-		public void Test()
-		{
-			NotesDbContext notesDbContext = new NotesDbContext();
-
-			notesDbContext.Database.EnsureDeleted();
-			notesDbContext.Database.EnsureCreated();
-		}
-	}
+            notesDbContext.Database.EnsureDeleted();
+            notesDbContext.Database.EnsureCreated();
+        }
+    }
 }

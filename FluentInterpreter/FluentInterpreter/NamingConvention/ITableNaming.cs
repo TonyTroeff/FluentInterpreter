@@ -1,9 +1,13 @@
+#region
+
+using System;
+
+#endregion
+
 namespace FluentInterpreter.NamingConvention
 {
-	using System;
-
-	public interface ITableNaming
-	{
-		string GetTableName(Type type);
-	}
+    public interface ITableNaming
+    {
+        string GetTableName(Type type);
+    }
 }

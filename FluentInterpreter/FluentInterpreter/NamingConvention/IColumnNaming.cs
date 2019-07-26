@@ -1,7 +1,7 @@
 namespace FluentInterpreter.NamingConvention
 {
-	public interface IColumnNaming
-	{
-		string GetColumnName(string propertyName);
-	}
+    public interface IColumnNaming
+    {
+        string GetColumnName(string propertyName);
+    }
 }

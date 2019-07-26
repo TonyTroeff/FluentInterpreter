@@ -1,4 +1,8 @@
+#region
+
 using System;
+
+#endregion
 
 namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
 {
@@ -6,7 +10,7 @@ namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
     {
         public TypeCollection DefinedTypes { get; } = new TypeCollection
         {
-            { typeof(byte), "smallint" },
+            {typeof(byte), "smallint"},
             {typeof(short), "smallint"},
             {typeof(int), "integer"},
             {typeof(long), "bigint"},
@@ -26,8 +30,14 @@ namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
             return type;
         }
 
-        public string GetFloatingPointType(int precision = 18, int scale = 0) => $"decimal({precision}, {scale})";
+        public string GetFloatingPointType(int precision = 18, int scale = 0)
+        {
+            return $"decimal({precision}, {scale})";
+        }
 
-        public string GetMoneyType() => "money";
+        public string GetMoneyType()
+        {
+            return "money";
+        }
     }
 }

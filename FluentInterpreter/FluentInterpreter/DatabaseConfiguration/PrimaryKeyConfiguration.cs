@@ -1,11 +1,15 @@
+#region
+
+using System;
+using System.Linq.Expressions;
+using FluentInterpreter.NamingConvention;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+#endregion
+
 namespace FluentInterpreter.DatabaseConfiguration
 {
-    using System;
-    using System.Linq.Expressions;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using NamingConvention;
-
     public static class PrimaryKeyConfiguration
     {
         public static KeyBuilder PrimaryKey<T>(
