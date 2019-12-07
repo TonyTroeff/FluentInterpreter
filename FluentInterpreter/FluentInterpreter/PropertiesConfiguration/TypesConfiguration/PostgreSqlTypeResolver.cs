@@ -16,7 +16,7 @@ namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
 			{typeof(long), "bigint"},
 			{typeof(bool), "boolean"},
 			{typeof(Guid), "uuid"},
-			{typeof(DateTime), "date"}
+			{typeof(DateTime), "timestamp"}
 		};
 
 		public string GetStringType(int length = 0, bool isUnicode = true, bool isFixedLength = false)

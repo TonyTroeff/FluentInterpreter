@@ -13,7 +13,7 @@ namespace FluentInterpreter.Tests
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(ReadConnectionString("postgresql"));
+            optionsBuilder.UseSqlServer(ReadConnectionString("sqlserver"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

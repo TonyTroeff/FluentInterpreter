@@ -2,3 +2,4 @@
 obj/
 bin/
 FluentInterpreter/FluentInterpreter.Tests/*.con
+FluentInterpreter/.vs

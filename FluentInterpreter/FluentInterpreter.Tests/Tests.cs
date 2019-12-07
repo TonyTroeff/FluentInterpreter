@@ -12,7 +12,7 @@ namespace FluentInterpreter.Tests
         [Test]
         public void Test()
         {
-            NotesDbContext notesDbContext = new NotesDbContext();
+            var notesDbContext = new NotesDbContext();
 
             notesDbContext.Database.EnsureDeleted();
             notesDbContext.Database.EnsureCreated();

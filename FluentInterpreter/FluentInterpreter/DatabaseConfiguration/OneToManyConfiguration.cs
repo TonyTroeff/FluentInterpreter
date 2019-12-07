@@ -21,7 +21,7 @@ namespace FluentInterpreter.DatabaseConfiguration
             where TDependent : class
             where TPrincipal : class
         {
-            string[] properties = Common.GetMembers(foreignKeyExpression);
+            var properties = Common.GetMembers(foreignKeyExpression);
             return builder.OneToMany(dependent, principal, properties);
         }
 
@@ -38,9 +38,9 @@ namespace FluentInterpreter.DatabaseConfiguration
             Common.CheckMemberExpression(dependent.Body);
             Common.CheckMemberExpression(principal.Body);
 
-            string dependentTableName = NamingServices.TableNaming.GetTableName(typeof(TDependent));
-            string principalTableName = NamingServices.TableNaming.GetTableName(typeof(TPrincipal));
-            string foreignKeyName = NamingServices.ForeignKeyNaming.GetConstraintName(
+            var dependentTableName = NamingServices.TableNaming.GetTableName(typeof(TDependent));
+            var principalTableName = NamingServices.TableNaming.GetTableName(typeof(TPrincipal));
+            var foreignKeyName = NamingServices.ForeignKeyNaming.GetConstraintName(
                 dependentTableName,
                 principalTableName,
                 properties);

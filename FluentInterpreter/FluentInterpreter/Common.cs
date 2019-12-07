@@ -17,7 +17,7 @@ namespace FluentInterpreter
         {
             if (expression == null) throw new InvalidArgumentException();
 
-            List<MemberInfo> properties = new List<MemberInfo>();
+            var properties = new List<MemberInfo>();
 
             if (expression.Body is MemberExpression memberExpression) properties.Add(memberExpression.Member);
             else if ((expression.Body as UnaryExpression)?.Operand is MemberExpression unaryExpression)
