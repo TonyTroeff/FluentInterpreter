@@ -13,7 +13,7 @@ namespace FluentInterpreter.Tests
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ReadConnectionString("sqlserver"));
+            optionsBuilder.UseNpgsql(ReadConnectionString("postgresql"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,6 +24,7 @@ namespace FluentInterpreter.Tests
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new NoteCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ChangeLogConfiguration());
         }
 
         private static string ReadConnectionString(string filename)

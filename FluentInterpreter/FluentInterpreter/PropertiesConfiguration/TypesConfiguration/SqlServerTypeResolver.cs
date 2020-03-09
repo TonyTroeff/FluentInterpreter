@@ -16,7 +16,8 @@ namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
             {typeof(long), "bigint"},
             {typeof(bool), "bit"},
             {typeof(Guid), "uniqueidentifier"},
-            {typeof(DateTime), "datetime2"}
+            {typeof(DateTime), "datetime2"},
+            {typeof(DateTimeOffset), "datetimeoffset"},
         };
 
         public string GetStringType(int length = 0, bool isUnicode = true, bool isFixedLength = false)

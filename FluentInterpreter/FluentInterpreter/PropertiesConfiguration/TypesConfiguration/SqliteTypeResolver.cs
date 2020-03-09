@@ -20,7 +20,8 @@ namespace FluentInterpreter.PropertiesConfiguration.TypesConfiguration
             {typeof(long), "integer"},
             {typeof(bool), "integer"},
             {typeof(Guid), "blob"},
-            {typeof(DateTime), "text"}
+            {typeof(DateTime), "text"},
+            {typeof(DateTimeOffset), "text"}
         };
 
         public string GetStringType(int length = 0, bool isUnicode = true, bool isFixedLength = false)

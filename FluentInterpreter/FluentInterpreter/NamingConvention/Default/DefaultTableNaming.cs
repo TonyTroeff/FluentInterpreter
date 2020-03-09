@@ -14,7 +14,7 @@ namespace FluentInterpreter.NamingConvention.Default
         {
             Common.CheckForNull(type);
 
-            return Regex.Replace(type.Name, @"[A-Z][a-z]+", match => match.Value.Pluralize(false));
+            return type.Name.Pluralize(false);
         }
     }
 }

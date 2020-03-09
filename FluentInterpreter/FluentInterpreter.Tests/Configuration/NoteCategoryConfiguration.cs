@@ -13,7 +13,7 @@ namespace FluentInterpreter.Tests.Configuration
     {
         public void Configure(EntityTypeBuilder<NoteCategory> builder)
         {
-            builder.Name();
+            builder.Name(typeof(Note), typeof(Category));
 
             builder.PrimaryKey(nc => new {nc.NoteId, nc.CategoryId});
 
