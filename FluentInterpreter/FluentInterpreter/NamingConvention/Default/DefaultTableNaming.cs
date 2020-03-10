@@ -1,7 +1,6 @@
 #region
 
 using System;
-using System.Text.RegularExpressions;
 using Humanizer;
 
 #endregion
